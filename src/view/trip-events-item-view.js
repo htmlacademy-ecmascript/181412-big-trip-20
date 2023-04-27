@@ -1,7 +1,7 @@
 import {createElement} from '../render.js';
 
 function createTripEventsItemTemplate() {
-    return `<li class="trip-events__item">
+  return `<li class="trip-events__item">
               <div class="event">
                 <time class="event__date" datetime="2019-03-18">MAR 18</time>
                 <div class="event__type">
@@ -41,19 +41,20 @@ function createTripEventsItemTemplate() {
 }
 
 export default class TripEventsItemView {
-    getTemplate() {
-        return createTripEventsItemTemplate();
+  getTemplate() {
+    return createTripEventsItemTemplate();
+  }
+
+  getElement() {
+    if (!this.element) {
+      this.element = createElement(this.getTemplate());
     }
 
-    getElement() {
-        if (!this.element) {
-            this.element = createElement(this.getTemplate());
-        }
+    return this.element;
+  }
 
-        return this.element;
-    }
-
-    removeElement() {
-        this.element = null;
-    }
+  removeElement() {
+    this.element = null;
+  }
 }
+
