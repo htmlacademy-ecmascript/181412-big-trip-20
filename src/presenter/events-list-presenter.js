@@ -1,4 +1,4 @@
-import {render} from '../render.js';
+import {render, RenderPosition } from '../render.js';
 import {createElement} from '../render.js';
 
 import TripEventsItemView from '../view/trip-events-item-view.js';
@@ -25,19 +25,24 @@ class EventsListContainer {
   }
 }
 
-export default class EventsList {
+export default class EventsListPresenter {
   eventsListComponent = new EventsListContainer();
 
 
-  constructor({eventsListContainer}) {
+  constructor({eventsListContainer, pointsModel}) {
     this.eventsListContainer = eventsListContainer;
+    this.pointsModel = pointsModel;
   }
 
   init() {
+    this.boardPoints = [...this.pointsModel.getPoints()];
+
     render(this.eventsListComponent, this.eventsListContainer,'beforeend'); // вставляем сам лист в контейнер
-    render(new TripEventsFormView, this.eventsListComponent.getElement(),'afterbegin'); //добавляем форму
-    for(let i = 0; i < 3 ; i++) {
-      render(new TripEventsItemView(), this.eventsListComponent.getElement()); // добавлляем события
+
+    render(new TripEventsFormView({point: this.boardPoints[0]}), this.eventsListComponent.getElement(), RenderPosition.AFTERBEGIN); //добавляем форму
+
+    for(let i = 0; i < this.boardPoints.length ; i++) {
+      render(new TripEventsItemView({point: this.boardPoints[i]}), this.eventsListComponent.getElement()); // добавляем события
     }
   }
 }
