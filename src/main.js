@@ -2,8 +2,8 @@ import {render} from './render.js';
 import TripInfoView from './view/trip-info-view.js';
 import FilterView from './view/filter-view.js';
 import SortView from './view/sort-view.js';
-
-import EventsList from './presenter/events-list.js';
+import PointsModel from './model/points-model.js';
+import EventsListPresenter from './presenter/events-list-presenter.js';
 
 const header = document.querySelector('header');
 const main = document.querySelector('main');
@@ -14,13 +14,18 @@ const sortContainer = main.querySelector('.trip-events');
 const tripContainer = main.querySelector('.trip-events');
 
 const tripInfoMainComponent = new TripInfoView();
-const FilterComponent = new FilterView();
-const SortComponent = new SortView();
+const filterComponent = new FilterView();
+const sortComponent = new SortView();
+const pointsModel = new PointsModel();
 
-const eventList = new EventsList({eventsListContainer: tripContainer});
+const eventListPresenter = new EventsListPresenter({
+  eventsListContainer: tripContainer,
+  pointsModel,
+});
 
 render(tripInfoMainComponent, tripMainContainer, 'afterbegin');
-render (FilterComponent,filterContainer, 'beforeend');
-render (SortComponent,sortContainer, 'beforeend');
-eventList.init();
+render (filterComponent, filterContainer, 'beforeend');
+render (sortComponent, sortContainer, 'beforeend');
+eventListPresenter.init();
+
 
