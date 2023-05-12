@@ -5,7 +5,7 @@ import {getRandomNumber} from '../utils.js';
 import {offersByTypes} from '../mock/mocks.js';
 import {DATE_TIME_EVENT} from '../const.js';
 
-
+/* Форма редактирования точки */
 function createTripEventsItemTemplate(point) {
   const {dateFrom, dateTo, type, destination, timeTo, timeFrom, basePrice, description} = point;
   const dateFromEvent = humanizeDate(dateFrom, DATE_TIME_EVENT); /*Начальная дата, отформатированная*/

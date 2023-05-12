@@ -3,6 +3,8 @@ import {humanizeDate} from '../utils.js';
 import { START_DATE_FORMAT, DATE_TIME_EVENT } from '../const.js';
 import {offersByTypes} from '../mock/mocks.js';
 
+/* Точка */
+
 function createTripEventsItemTemplate(point) {
   const {basePrice, dateFrom, timeFrom, timeTo, dateTo, isFavorite, destination, type, offers} = point;
 
@@ -13,7 +15,7 @@ function createTripEventsItemTemplate(point) {
   const pointTypeOffer = offersByTypes.find((offer) => offer.type === type);
   const checkedOffers = pointTypeOffer.offers.filter((offer) => offers.includes(offer.id));
 
-  const createOffersListTemplate = () => {
+  const createOffersListTemplate = () => { /* Функция для отрисовки выбранных офферов*/
     if (checkedOffers.length === 0) {
       return (
         `<li class="event__offer">

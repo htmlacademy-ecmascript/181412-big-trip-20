@@ -1,5 +1,8 @@
-import {render, RenderPosition } from '../render.js';
+import {render} from '../render.js';
 import {createElement} from '../render.js';
+import AbstractView from '../framework/view/abstract-view.js';
+import {RenderPosition} from '../framework/render.js';
+
 
 import TripEventsItemView from '../view/trip-events-item-view.js';
 import TripEventsFormView from '../view/trip-events-form-view.js';
