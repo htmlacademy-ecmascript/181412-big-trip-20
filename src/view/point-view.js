@@ -1,10 +1,9 @@
-import {createElement} from '../render.js';
 import {humanizeDate} from '../utils.js';
 import { START_DATE_FORMAT, DATE_TIME_EVENT } from '../const.js';
 import {offersByTypes} from '../mock/mocks.js';
+import AbstractView from '../framework/view/abstract-view.js';
 
 /* Точка */
-
 function createTripEventsItemTemplate(point) {
   const {basePrice, dateFrom, timeFrom, timeTo, dateTo, isFavorite, destination, type, offers} = point;
 
@@ -67,25 +66,14 @@ function createTripEventsItemTemplate(point) {
             </li>`;
 }
 
-export default class TripEventsItemView {
+export default class PointView extends AbstractView {
   constructor({point}) {
+    super();
     this.point = point;
   }
 
-  getTemplate() {
+  get template() {
     return createTripEventsItemTemplate(this.point);
-  }
-
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
   }
 }
 

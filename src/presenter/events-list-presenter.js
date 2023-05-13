@@ -1,36 +1,10 @@
-import {render} from '../render.js';
-import {createElement} from '../render.js';
-import AbstractView from '../framework/view/abstract-view.js';
-import {RenderPosition} from '../framework/render.js';
-
-
-import TripEventsItemView from '../view/trip-events-item-view.js';
-import TripEventsFormView from '../view/trip-events-form-view.js';
-
-function createEventsListContainer() {
-  return '<ul class="trip-events__list"></ul>';
-}
-
-class EventsListContainer {
-  getTemplate() {
-    return createEventsListContainer();
-  }
-
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
-  }
-}
+import {RenderPosition, render} from '../framework/render.js';
+import EventsListContainer from '../view/point-list-view.js';
+import PointView from '../view/point-view.js';
+import PointEditFormView from '../view/point-edit-form-view.js';
 
 export default class EventsListPresenter {
   eventsListComponent = new EventsListContainer();
-
 
   constructor({eventsListContainer, pointsModel}) {
     this.eventsListContainer = eventsListContainer;
@@ -38,14 +12,17 @@ export default class EventsListPresenter {
   }
 
   init() {
+    /* Передаем массив точек */
     this.boardPoints = [...this.pointsModel.getPoints()];
 
-    render(this.eventsListComponent, this.eventsListContainer,'beforeend'); // вставляем сам лист в контейнер
+    // вставляем сам лист в контейнер
+    render(this.eventsListComponent, this.eventsListContainer, RenderPosition.BEFOREEND);
 
-    render(new TripEventsFormView({point: this.boardPoints[0]}), this.eventsListComponent.getElement(), RenderPosition.AFTERBEGIN); //добавляем форму
-
+    //добавляем форму
+    render(new PointEditFormView({point: this.boardPoints[0]}), this.eventsListComponent.element, RenderPosition.AFTERBEGIN);
+    // добавляем точки
     for(let i = 0; i < this.boardPoints.length ; i++) {
-      render(new TripEventsItemView({point: this.boardPoints[i]}), this.eventsListComponent.getElement()); // добавляем события
+      render(new PointView({point: this.boardPoints[i]}), this.eventsListComponent.element);
     }
   }
 }

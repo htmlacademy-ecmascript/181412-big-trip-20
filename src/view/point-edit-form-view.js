@@ -1,22 +1,27 @@
-import {createElement} from '../render.js';
 import {humanizeDate} from '../utils.js';
 import {getRandomNumber} from '../utils.js';
-//import {DATE_TIME_EDIT_EVENT} from '../const.js';
 import {offersByTypes} from '../mock/mocks.js';
 import {DATE_TIME_EVENT} from '../const.js';
+import AbstractView from '../framework/view/abstract-view.js';
 
 /* Форма редактирования точки */
-function createTripEventsItemTemplate(point) {
-  const {dateFrom, dateTo, type, destination, timeTo, timeFrom, basePrice, description} = point;
+function createPointEditFormTemplate(point) {
+  const {dateFrom, dateTo, destination, timeTo, timeFrom, basePrice, description, offers, type} = point;
   const dateFromEvent = humanizeDate(dateFrom, DATE_TIME_EVENT); /*Начальная дата, отформатированная*/
   const dateToEvent = humanizeDate(dateTo, DATE_TIME_EVENT); /*Конечная дата, отформатированная*/
-  const pointTypeOffer = offersByTypes.find((item) => item.type === type); /*Нашли список офферов для нашего ТИПА*/
+  const pointTypeOffer = offersByTypes.find(
+    (item) => item.type === type); /*Нашли список офферов для нашего ТИПА*/
+    //console.log('ТОЧКА point', point)
+    //console.log('выбранные офферы offers', offers) /*выбранные офферы */
+    //console.log('список офферов по ТИПУ pointTypeOffer', pointTypeOffer) /*список офферов по ТИПУ*/
+    //console.log(pointTypeOffer.offers)
 
-  const createCheckedTripOffersTemplate = pointTypeOffer.offers.map((offer) => { /*Функция для отрисовки _чекнутых_ Офферов */
-    const checkedOffers = point.offers.includes(offer.id) ? offer.checked : '';
+  /*Функция для отрисовки _чекнутых_ Офферов */
+  const createCheckedTripOffersTemplate = pointTypeOffer.offers.map((offer) => {
+    const isChecked = offers.includes(offer.id);
     return (
       `<div class="event__offer-selector">
-        <input class="event__offer-checkbox  visually-hidden" id="event-offer-${offer.title}-1" type="checkbox" name="event-offer-luggage" ${checkedOffers ? 'checked' : ''}>
+        <input class="event__offer-checkbox  visually-hidden" id="event-offer-${offer.title}-1" type="checkbox" name="event-offer-luggage" ${isChecked ? 'checked' : ''}>
         <label class="event__offer-label" for="event-offer-luggage-1">
           <span class="event__offer-title">${offer.title}</span>
           +€&nbsp;
@@ -25,6 +30,7 @@ function createTripEventsItemTemplate(point) {
       </div> `);
   }).join('');
 
+  /*Функция для отрисовки выпадающего списка типов */
   const createEventTypeList = offersByTypes.map((item) =>
     `<div class="event__type-item">
       <input id="event-type-${item.type}-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="${item.type}">
@@ -109,25 +115,14 @@ function createTripEventsItemTemplate(point) {
             </li>`;
 }
 
-export default class TripEventsItemView {
+export default class PointEditFormView extends AbstractView {
   constructor({point}) {
+    super();
     this.point = point;
   }
 
-  getTemplate() {
-    return createTripEventsItemTemplate(this.point);
-  }
-
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
+  get template() {
+    return createPointEditFormTemplate(this.point);
   }
 }
 
