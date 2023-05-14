@@ -1,5 +1,5 @@
-import {humanizeDate} from '../utils.js';
-import {getRandomNumber} from '../utils.js';
+import {humanizeDate} from '../utils/point.js';
+import {getRandomNumber} from '../utils/common.js';
 import {offersByTypes} from '../mock/mocks.js';
 import {DATE_TIME_EVENT} from '../const.js';
 import AbstractView from '../framework/view/abstract-view.js';
@@ -116,13 +116,35 @@ function createPointEditFormTemplate(point) {
 }
 
 export default class PointEditFormView extends AbstractView {
-  constructor({point}) {
+  #point = null;
+  #handleEditFormSubmit = null;
+  #handleResetFormSubmit = null;
+
+  constructor({point, onEditFormSubmit, onResetFormSubmit}) {
     super();
-    this.point = point;
+    this.#point = point;
+    this.#handleEditFormSubmit = onEditFormSubmit;
+    this.#handleResetFormSubmit = onResetFormSubmit;
+
+    this.element.querySelector('form')
+      .addEventListener('submit', this.#formSubmitFormHandler);
+
+    this.element.querySelector('.event__reset-btn')
+      .addEventListener('click', this.#formResetFormHandler);
   }
 
   get template() {
-    return createPointEditFormTemplate(this.point);
+    return createPointEditFormTemplate(this.#point);
   }
+
+  #formSubmitFormHandler = (e) => {
+    e.preventDefault();
+    this.#handleEditFormSubmit();
+  };
+
+  #formResetFormHandler = (e) => {
+    e.preventDefault();
+    this.#handleResetFormSubmit();
+  };
 }
 

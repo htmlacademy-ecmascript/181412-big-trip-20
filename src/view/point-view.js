@@ -1,4 +1,4 @@
-import {humanizeDate} from '../utils.js';
+import {humanizeDate} from '../utils/point.js';
 import { START_DATE_FORMAT, DATE_TIME_EVENT } from '../const.js';
 import {offersByTypes} from '../mock/mocks.js';
 import AbstractView from '../framework/view/abstract-view.js';
@@ -67,13 +67,25 @@ function createTripEventsItemTemplate(point) {
 }
 
 export default class PointView extends AbstractView {
-  constructor({point}) {
+  #point = null;
+  #handlePointEditClick = null;
+
+  constructor({point, onPointEditClick}) {
     super();
-    this.point = point;
+    this.#point = point;
+    this.#handlePointEditClick = onPointEditClick;
+
+    this.element.querySelector('.event__rollup-btn')
+      .addEventListener('click', this.#editPointHandler);
   }
 
   get template() {
-    return createTripEventsItemTemplate(this.point);
+    return createTripEventsItemTemplate(this.#point);
   }
+
+  #editPointHandler = (e) => {
+    e.preventDefault();
+    this.#handlePointEditClick();
+  };
 }
 

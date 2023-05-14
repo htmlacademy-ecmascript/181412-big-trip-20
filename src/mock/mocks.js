@@ -1,4 +1,4 @@
-import {getRandomArrayElement, getRandomNumber} from '../utils';
+import {getRandomArrayElement, getRandomNumber} from '../utils/common.js';
 
 const offersByTypes = [
   {

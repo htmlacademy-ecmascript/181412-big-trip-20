@@ -1,15 +1,8 @@
-import dayjs from 'dayjs';
-
-function humanizeDate(date,dateFormat) {
-  return date ? dayjs(date).format(dateFormat) : '';
-}
-
-function getRandomArrayElement(items) {
+function getRandomArrayElement (items) {
   return items[Math.floor(Math.random() * items.length)];
 }
 
 const getRandomNumber = (a, b) => {
-
   if (a < 0 || b < 0) {
     return NaN;
   }
@@ -20,7 +13,4 @@ const getRandomNumber = (a, b) => {
   return Math.floor(result);
 };
 
-const isOfferChecked = (checked) => Object.values(checked).some(Boolean);
-
-export { getRandomArrayElement, getRandomNumber, humanizeDate, isOfferChecked };
-
+export { getRandomArrayElement, getRandomNumber};
