@@ -1,5 +1,5 @@
-import {humanizeDate} from '../utils/point.js';
-import { START_DATE_FORMAT, DATE_TIME_EVENT } from '../const.js';
+import {humanizeDate, calculateDiffTime} from '../utils/point.js';
+import { DATE_FORMAT, DATE_TIME_FORMAT } from '../const.js';
 import {offersByTypes} from '../mock/mocks.js';
 import AbstractView from '../framework/view/abstract-view.js';
 
@@ -8,11 +8,12 @@ function createTripEventsItemTemplate(point) {
   const {basePrice, dateFrom, timeFrom, timeTo, dateTo, isFavorite, destination, type, offers} = point;
 
   const favoriteClassName = isFavorite ? 'event__favorite-btn event__favorite-btn--active' : 'event__favorite-btn';
-  const humanizeDateFrom = humanizeDate(dateFrom, START_DATE_FORMAT);
-  const dateFromEvent = humanizeDate(dateFrom, DATE_TIME_EVENT);
-  const dateToEvent = humanizeDate(dateTo, DATE_TIME_EVENT);
+  const humanizeDateFrom = humanizeDate(dateFrom, DATE_FORMAT);
+  const dateFromEvent = humanizeDate(dateFrom, DATE_TIME_FORMAT);
+  const dateToEvent = humanizeDate(dateTo, DATE_TIME_FORMAT);
   const pointTypeOffer = offersByTypes.find((offer) => offer.type === type);
   const checkedOffers = pointTypeOffer.offers.filter((offer) => offers.includes(offer.id));
+  const pointDuration = calculateDiffTime(dateFrom, dateTo)
 
   const createOffersListTemplate = () => { /* Функция для отрисовки выбранных офферов*/
     if (checkedOffers.length === 0) {
@@ -44,7 +45,7 @@ function createTripEventsItemTemplate(point) {
                     —
                     <time class="event__end-time" datetime="${dateToEvent}T${timeTo}">${timeTo}</time>
                   </p>
-                  <p class="event__duration">30M</p>
+                  <p class="event__duration">${pointDuration}</p>
                 </div>
                 <p class="event__price">
                   €&nbsp;<span class="event__price-value">${basePrice}</span>
