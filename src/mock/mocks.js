@@ -1,4 +1,4 @@
-import {getRandomArrayElement, getRandomNumber} from '../utils';
+import {getRandomArrayElement, getRandomNumber} from '../utils/common.js';
 
 const offersByTypes = [
   {
@@ -6,17 +6,22 @@ const offersByTypes = [
     'offers': [
       {
         'id': 1,
-        'title': 'Choose the radio',
+        'title': 'Выбрать радиостанцию',
         'price': 120
       },
       {
         'id': 2,
-        'title': 'Order Uber',
+        'title': 'Заказать Uber',
         'price': 20
       },
       {
         'id': 3,
-        'title': 'Order Ice Cream',
+        'title': 'Некурящий водитель',
+        'price': 5
+      },
+      {
+        'id': 4,
+        'title': 'Детское кресло',
         'price': 5
       },
     ]
@@ -27,14 +32,20 @@ const offersByTypes = [
     'offers': [
       {
         'id': 1,
-        'title': 'Choose the radio',
+        'title': 'Выбрать радиоостанцию',
         'price': 120
       },
       {
         'id': 2,
-        'title': 'Order Uber',
+        'title': 'Место у окна',
         'price': 20
-      }]
+      },
+      {
+        'id': 3,
+        'title': 'Откидывающееся сиденье',
+        'price': 20
+      }
+    ]
   },
 
   {
@@ -42,27 +53,27 @@ const offersByTypes = [
     'offers': [
       {
         'id': 1,
-        'title': 'Add luggage',
+        'title': 'Добавить багаж',
         'price': 30
       },
       {
         'id': 2,
-        'title': 'Switch to comfort',
+        'title': 'Бизнес-класс',
         'price': 100
       },
       {
         'id': 3,
-        'title': 'Add meal',
+        'title': 'Веганский обед',
         'price': 15
       },
       {
         'id': 4,
-        'title': 'Choose seats',
+        'title': 'Выбрать место',
         'price': 5
       },
       {
         'id': 5,
-        'title': 'Travel by train',
+        'title': 'Такси у трапа',
         'price': 40
       },
     ]
@@ -72,12 +83,12 @@ const offersByTypes = [
     'type': 'train',
     'offers': [{
       'id': 1,
-      'title': 'Choose the radio',
+      'title': 'Выбрать радиостанцию',
       'price': 120
     },
     {
       'id': 2,
-      'title': 'Order Uber',
+      'title': 'Нижняя полка',
       'price': 20
     }]
   },
@@ -91,12 +102,12 @@ const offersByTypes = [
     'type': 'drive',
     'offers': [{
       'id': 1,
-      'title': 'Choose the radio',
+      'title': 'Некурящий водитель',
       'price': 120
     },
     {
       'id': 2,
-      'title': 'Order Uber',
+      'title': 'Кондиционер в салоне',
       'price': 20
     }]
   },
@@ -105,12 +116,12 @@ const offersByTypes = [
     'type': 'check-in',
     'offers': [{
       'id': 1,
-      'title': 'Choose the radio',
+      'title': 'Дополнительная уборка',
       'price': 120
     },
     {
       'id': 2,
-      'title': 'Order Uber',
+      'title': 'Раннее заселение',
       'price': 20
     }]
   },
@@ -119,26 +130,32 @@ const offersByTypes = [
     'type': 'sightseeing',
     'offers': [{
       'id': 1,
-      'title': 'Choose the radio',
+      'title': 'Вход без очереди',
       'price': 120
     },
     {
       'id': 2,
-      'title': 'Order Uber',
+      'title': 'Персональный гид',
       'price': 20
-    }]
+    },
+    {
+      'id': 3,
+      'title': 'Ланч включен',
+      'price': 20
+    }
+    ]
   },
 
   {
     'type': 'restaurant',
     'offers': [{
       'id': 1,
-      'title': 'Choose the radio',
+      'title': 'Столик у окна',
       'price': 120
     },
     {
       'id': 2,
-      'title': 'Order Uber',
+      'title': 'Персональный официант',
       'price': 20
     }]
   },

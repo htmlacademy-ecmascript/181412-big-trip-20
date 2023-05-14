@@ -1,22 +1,27 @@
-import {createElement} from '../render.js';
-import {humanizeDate} from '../utils.js';
-import {getRandomNumber} from '../utils.js';
-//import {DATE_TIME_EDIT_EVENT} from '../const.js';
+import {humanizeDate} from '../utils/point.js';
+import {getRandomNumber} from '../utils/common.js';
 import {offersByTypes} from '../mock/mocks.js';
 import {DATE_TIME_EVENT} from '../const.js';
+import AbstractView from '../framework/view/abstract-view.js';
 
-
-function createTripEventsItemTemplate(point) {
-  const {dateFrom, dateTo, type, destination, timeTo, timeFrom, basePrice, description} = point;
+/* Форма редактирования точки */
+function createPointEditFormTemplate(point) {
+  const {dateFrom, dateTo, destination, timeTo, timeFrom, basePrice, description, offers, type} = point;
   const dateFromEvent = humanizeDate(dateFrom, DATE_TIME_EVENT); /*Начальная дата, отформатированная*/
   const dateToEvent = humanizeDate(dateTo, DATE_TIME_EVENT); /*Конечная дата, отформатированная*/
-  const pointTypeOffer = offersByTypes.find((item) => item.type === type); /*Нашли список офферов для нашего ТИПА*/
+  const pointTypeOffer = offersByTypes.find(
+    (item) => item.type === type); /*Нашли список офферов для нашего ТИПА*/
+    //console.log('ТОЧКА point', point)
+    //console.log('выбранные офферы offers', offers) /*выбранные офферы */
+    //console.log('список офферов по ТИПУ pointTypeOffer', pointTypeOffer) /*список офферов по ТИПУ*/
+    //console.log(pointTypeOffer.offers)
 
-  const createCheckedTripOffersTemplate = pointTypeOffer.offers.map((offer) => { /*Функция для отрисовки _чекнутых_ Офферов */
-    const checkedOffers = point.offers.includes(offer.id) ? offer.checked : '';
+  /*Функция для отрисовки _чекнутых_ Офферов */
+  const createCheckedTripOffersTemplate = pointTypeOffer.offers.map((offer) => {
+    const isChecked = offers.includes(offer.id);
     return (
       `<div class="event__offer-selector">
-        <input class="event__offer-checkbox  visually-hidden" id="event-offer-${offer.title}-1" type="checkbox" name="event-offer-luggage" ${checkedOffers ? 'checked' : ''}>
+        <input class="event__offer-checkbox  visually-hidden" id="event-offer-${offer.title}-1" type="checkbox" name="event-offer-luggage" ${isChecked ? 'checked' : ''}>
         <label class="event__offer-label" for="event-offer-luggage-1">
           <span class="event__offer-title">${offer.title}</span>
           +€&nbsp;
@@ -25,6 +30,7 @@ function createTripEventsItemTemplate(point) {
       </div> `);
   }).join('');
 
+  /*Функция для отрисовки выпадающего списка типов */
   const createEventTypeList = offersByTypes.map((item) =>
     `<div class="event__type-item">
       <input id="event-type-${item.type}-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="${item.type}">
@@ -109,25 +115,36 @@ function createTripEventsItemTemplate(point) {
             </li>`;
 }
 
-export default class TripEventsItemView {
-  constructor({point}) {
-    this.point = point;
+export default class PointEditFormView extends AbstractView {
+  #point = null;
+  #handleEditFormSubmit = null;
+  #handleResetFormSubmit = null;
+
+  constructor({point, onEditFormSubmit, onResetFormSubmit}) {
+    super();
+    this.#point = point;
+    this.#handleEditFormSubmit = onEditFormSubmit;
+    this.#handleResetFormSubmit = onResetFormSubmit;
+
+    this.element.querySelector('form')
+      .addEventListener('submit', this.#formSubmitFormHandler);
+
+    this.element.querySelector('.event__reset-btn')
+      .addEventListener('click', this.#formResetFormHandler);
   }
 
-  getTemplate() {
-    return createTripEventsItemTemplate(this.point);
+  get template() {
+    return createPointEditFormTemplate(this.#point);
   }
 
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
+  #formSubmitFormHandler = (e) => {
+    e.preventDefault();
+    this.#handleEditFormSubmit();
+  };
 
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
-  }
+  #formResetFormHandler = (e) => {
+    e.preventDefault();
+    this.#handleResetFormSubmit();
+  };
 }
 
