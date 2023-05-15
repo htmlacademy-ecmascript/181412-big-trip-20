@@ -11,8 +11,6 @@ function createPointEditFormTemplate(point) {
   const dateToEvent = humanizeDate(dateTo, DATE_TIME_FORMAT); /*Конечная дата, отформатированная*/
   const pointTypeOffer = offersByTypes.find((item) => item.type === type); /*Нашли список офферов для нашего ТИПА*/
 
-
-
   /*Функция для отрисовки _чекнутых_ Офферов */
   const createCheckedTripOffersTemplate = pointTypeOffer.offers.map((offer) => {
     const isChecked = offers.includes(offer.id);

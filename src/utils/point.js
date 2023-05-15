@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
-import duration from 'dayjs/plugin/duration';
-import {FILTER_DAY_FORMAT} from '../const.js'
+import duration from 'dayjs/plugin/duration.js';
+import {FILTER_DAY_FORMAT} from '../const.js';
 
 import isBetween from 'dayjs/plugin/isBetween';
 dayjs.extend(duration);
@@ -33,14 +33,14 @@ const isFuturePoint = (dateStart) => {
   //console.log('дата Начала Больше?', formatDateStart)
   //console.log('текущей даты', '2023-05-14')
   return dayjs().isBefore(dayjs(formatDateStart));
-}
+};
 
 const isPastPoint = (dateEnd) => {
   const formatDateEnd = humanizeDate(dateEnd, FILTER_DAY_FORMAT);
   //console.log('дата Окончания меньше?', formatDateEnd)
   //console.log('текущей даты', '2023-05-14')
   return dayjs().isAfter(dayjs(formatDateEnd));
-}
+};
 
 const isPresentPoint = (dateStart, dateEnd) => {
   const formatDateStart = humanizeDate(dateStart, FILTER_DAY_FORMAT);
@@ -51,8 +51,8 @@ const isPresentPoint = (dateStart, dateEnd) => {
   //console.log(formatDateEnd, 'дата меньше текущей?', dayjs().isAfter(dayjs(formatDateEnd)))
   //console.log('В ПРЕДЕЛАХ?', formatDateStart, '-', formatDateEnd)
 
-  return  dayjs().isAfter(dayjs(formatDateStart)) && dayjs().isBefore(dayjs(formatDateEnd));
-}
+  return dayjs().isAfter(dayjs(formatDateStart)) && dayjs().isBefore(dayjs(formatDateEnd));
+};
 
 
 export {humanizeDate, calculateDiffTime, isFuturePoint, isPastPoint, isPresentPoint};

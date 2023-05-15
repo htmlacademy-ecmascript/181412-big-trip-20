@@ -13,7 +13,7 @@ function createTripEventsItemTemplate(point) {
   const dateToEvent = humanizeDate(dateTo, DATE_TIME_FORMAT);
   const pointTypeOffer = offersByTypes.find((offer) => offer.type === type);
   const checkedOffers = pointTypeOffer.offers.filter((offer) => offers.includes(offer.id));
-  const pointDuration = calculateDiffTime(dateFrom, dateTo)
+  const pointDuration = calculateDiffTime(dateFrom, dateTo);
 
   const createOffersListTemplate = () => { /* Функция для отрисовки выбранных офферов*/
     if (checkedOffers.length === 0) {
