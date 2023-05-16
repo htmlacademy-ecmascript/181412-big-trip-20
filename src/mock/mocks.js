@@ -203,10 +203,10 @@ const MOCK_POINTS = [
     description: tripDestinations[0].description,
     pictures: tripDestinations[0].pictures.src,
     basePrice: 500,
-    dateFrom: '2019-08-11T20:35:56.845Z',
-    dateTo: '2019-08-12T11:25:13.375Z',
+    dateFrom: '2023-01-11T20:35:56.845Z',
+    dateTo: '2023-02-12T11:25:13.375Z',
     timeFrom: '10:30',
-    timeTo: '11:00',
+    timeTo: '12:00',
     isFavorite: true
   },
   {
@@ -216,8 +216,8 @@ const MOCK_POINTS = [
     destination: tripDestinations[1].name,
     description: tripDestinations[1].description,
     basePrice: 40,
-    dateFrom: '2019-09-11T20:35:56.845Z',
-    dateTo: '2019-09-12T11:25:13.375Z',
+    dateFrom: '2023-09-11T20:35:56.845Z',
+    dateTo: '2023-09-12T11:25:13.375Z',
     timeFrom: '10:30',
     timeTo: '11:00',
     isFavorite: true
@@ -229,10 +229,10 @@ const MOCK_POINTS = [
     destination: tripDestinations[2].name,
     description: tripDestinations[2].description,
     basePrice: 200,
-    dateFrom: '2019-10-11T20:35:56.845Z',
-    dateTo: '2019-10-12T11:25:13.375Z',
+    dateFrom: '2023-10-11T20:35:56.845Z',
+    dateTo: '2023-10-12T11:25:13.375Z',
     timeFrom: '10:30',
-    timeTo: '11:00',
+    timeTo: '13:00',
     isFavorite: true
   },
   {
@@ -242,8 +242,8 @@ const MOCK_POINTS = [
     destination: tripDestinations[0].name,
     description: tripDestinations[0].description,
     basePrice: 80,
-    dateFrom: '2019-07-11T20:35:56.845Z',
-    dateTo: '2019-07-12T11:25:13.375Z',
+    dateFrom: '2023-05-10T20:35:56.845Z',
+    dateTo: '2023-05-17T11:25:13.375Z',
     timeFrom: '10:30',
     timeTo: '11:00',
     isFavorite: true
@@ -255,10 +255,10 @@ const MOCK_POINTS = [
     destination: tripDestinations[1].name,
     description: tripDestinations[1].description,
     basePrice: 90,
-    dateFrom: '2019-07-11T20:35:56.845Z',
-    dateTo: '2019-07-12T11:25:13.375Z',
+    dateFrom: '2023-07-11T20:35:56.845Z',
+    dateTo: '2023-07-12T11:25:13.375Z',
     timeFrom: '10:30',
-    timeTo: '11:00',
+    timeTo: '14:00',
     isFavorite: true
   },
   {
@@ -268,10 +268,10 @@ const MOCK_POINTS = [
     destination: tripDestinations[2].name,
     description: tripDestinations[2].description,
     basePrice: 150,
-    dateFrom: '2019-07-11T20:35:56.845Z',
-    dateTo: '2019-07-12T11:25:13.375Z',
+    dateFrom: '2023-03-11T20:35:56.845Z',
+    dateTo: '2023-03-12T11:25:13.375Z',
     timeFrom: '10:30',
-    timeTo: '11:00',
+    timeTo: '10:45',
     isFavorite: true
   },
   {
@@ -281,10 +281,10 @@ const MOCK_POINTS = [
     destination: tripDestinations[0].name,
     description: tripDestinations[0].description,
     basePrice: 150,
-    dateFrom: '2019-07-11T20:35:56.845Z',
-    dateTo: '2019-07-12T11:25:13.375Z',
+    dateFrom: '2023-02-11T20:35:56.845Z',
+    dateTo: '2023-02-12T11:25:13.375Z',
     timeFrom: '10:30',
-    timeTo: '11:00',
+    timeTo: '12:30',
     isFavorite: false
   },
   {
@@ -294,10 +294,10 @@ const MOCK_POINTS = [
     destination: tripDestinations[1].name,
     description: tripDestinations[1].description,
     basePrice: 100,
-    dateFrom: '2019-07-11T20:35:56.845Z',
-    dateTo: '2019-07-12T11:25:13.375Z',
+    dateFrom: '2023-05-11T20:35:56.845Z',
+    dateTo: '2023-05-21T11:25:13.375Z',
     timeFrom: '10:30',
-    timeTo: '11:00',
+    timeTo: '14:00',
     isFavorite: false
   },
   {
@@ -307,10 +307,10 @@ const MOCK_POINTS = [
     destination: tripDestinations[2].name,
     description: tripDestinations[2].description,
     basePrice: 100,
-    dateFrom: '2019-07-10T22:55:56.845Z',
-    dateTo: '2019-07-11T11:22:13.375Z',
+    dateFrom: '2023-05-10T22:55:56.845Z',
+    dateTo: '2023-05-20T11:22:13.375Z',
     timeFrom: '10:30',
-    timeTo: '11:00',
+    timeTo: '11:15',
     isFavorite: false
   }
 ];

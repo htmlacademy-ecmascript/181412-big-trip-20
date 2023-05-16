@@ -1,20 +1,15 @@
 import {humanizeDate} from '../utils/point.js';
 import {getRandomNumber} from '../utils/common.js';
 import {offersByTypes} from '../mock/mocks.js';
-import {DATE_TIME_EVENT} from '../const.js';
+import {DATE_TIME_FORMAT} from '../const.js';
 import AbstractView from '../framework/view/abstract-view.js';
 
 /* Форма редактирования точки */
 function createPointEditFormTemplate(point) {
   const {dateFrom, dateTo, destination, timeTo, timeFrom, basePrice, description, offers, type} = point;
-  const dateFromEvent = humanizeDate(dateFrom, DATE_TIME_EVENT); /*Начальная дата, отформатированная*/
-  const dateToEvent = humanizeDate(dateTo, DATE_TIME_EVENT); /*Конечная дата, отформатированная*/
-  const pointTypeOffer = offersByTypes.find(
-    (item) => item.type === type); /*Нашли список офферов для нашего ТИПА*/
-    //console.log('ТОЧКА point', point)
-    //console.log('выбранные офферы offers', offers) /*выбранные офферы */
-    //console.log('список офферов по ТИПУ pointTypeOffer', pointTypeOffer) /*список офферов по ТИПУ*/
-    //console.log(pointTypeOffer.offers)
+  const dateFromEvent = humanizeDate(dateFrom, DATE_TIME_FORMAT); /*Начальная дата, отформатированная*/
+  const dateToEvent = humanizeDate(dateTo, DATE_TIME_FORMAT); /*Конечная дата, отформатированная*/
+  const pointTypeOffer = offersByTypes.find((item) => item.type === type); /*Нашли список офферов для нашего ТИПА*/
 
   /*Функция для отрисовки _чекнутых_ Офферов */
   const createCheckedTripOffersTemplate = pointTypeOffer.offers.map((offer) => {
