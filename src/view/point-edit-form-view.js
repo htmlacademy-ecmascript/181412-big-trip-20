@@ -113,33 +113,33 @@ function createPointEditFormTemplate(point) {
 export default class PointEditFormView extends AbstractView {
   #point = null;
   #handleEditFormSubmit = null;
-  #handleResetFormSubmit = null;
+  #handleEditFormReset = null;
 
-  constructor({point, onEditFormSubmit, onResetFormSubmit}) {
+  constructor({point, onEditFormSubmit, onEditFormReset}) {
     super();
     this.#point = point;
     this.#handleEditFormSubmit = onEditFormSubmit;
-    this.#handleResetFormSubmit = onResetFormSubmit;
+    this.#handleEditFormReset = onEditFormReset;
 
     this.element.querySelector('form')
-      .addEventListener('submit', this.#formSubmitFormHandler);
+      .addEventListener('submit', this.#submitFormHandler);
 
     this.element.querySelector('.event__reset-btn')
-      .addEventListener('click', this.#formResetFormHandler);
+      .addEventListener('click', this.#resetFormHandler);
   }
 
   get template() {
     return createPointEditFormTemplate(this.#point);
   }
 
-  #formSubmitFormHandler = (e) => {
+  #submitFormHandler = (e) => {
     e.preventDefault();
     this.#handleEditFormSubmit();
   };
 
-  #formResetFormHandler = (e) => {
+  #resetFormHandler = (e) => {
     e.preventDefault();
-    this.#handleResetFormSubmit();
+    this.#handleEditFormReset();
   };
 }
 
