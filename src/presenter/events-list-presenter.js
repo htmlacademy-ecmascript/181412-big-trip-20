@@ -42,7 +42,6 @@ export default class EventsListPresenter {
     //Отрисовывает, но нормально работает ТОЛЬКО последний
     for (let i = 0; i < points.length; i++) {
       pointPresenter.init(points[i]);
-      // this.#renderPoints(points[i], destinations, offers);
     }
   }
 
@@ -57,46 +56,13 @@ export default class EventsListPresenter {
   #renderSort() {
     render(this.#sortComponent, this.#eventsListContainer);
   }
-
   // Метод для отрисовки ПУСТОГО ЛИСТА
   #renderEmptyList() {
     render(this.#emptyListComponent, this.#eventsListContainer);
   }
 
-  // Метод для отрисовки ТОЧЕК
-  #renderPoints(point, destinations, offers) {
-    const escKeyHandler = (evt) => {
-    };
-    const itemComponent = new PointView({
-      point,
-      destinations,
-      offers,
-      onEditFormShow: () => {
-        replacePointToForm();
-      },
-    });
 
-    const pointEditForm = new PointEditFormView({
-      point,
-      destinations,
-      offers,
-      onFormSubmit: () => {
-        replaseFormToPoint();
-      },
-    });
 
-    function replacePointToForm() {
-      replace(pointEditForm, itemComponent);
-      document.addEventListener('keydown', escKeyHandler);
-    }
-
-    function replaseFormToPoint() {
-      replace(itemComponent, pointEditForm);
-      document.removeEventListener('keydown', escKeyHandler);
-    }
-
-    render(itemComponent, this.#pointsListComponent .element);
-  }
 }
 
 

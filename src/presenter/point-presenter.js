@@ -10,7 +10,7 @@ export default class PointPresenter {
   #pointComponent = null; // будущая точка (li)
   #pointEditFormComponent = null;// будущая форма редактирования
 
-  #item = null;
+  #point = null;
   #escKeyHandler = null;
 
   constructor({points, destinations, offers, pointListContainer}) {
@@ -20,9 +20,10 @@ export default class PointPresenter {
     this.#pointListContainer = pointListContainer;
   }
 
-  #renderPoints(point, destinations, offers) { /*При вызове метода нужно будет передать точку*/
+  #renderPoint(point, destinations, offers) { /*При вызове метода нужно будет передать точку*/
+    console.log(point)
     // Создаем экземпляр ТОЧКИ, передавая данные точки и хэндлер при клике (открытии)
-    this.#pointComponent = new PointView({ /* Создаем экзепляр Точки*/
+    this.#pointComponent = new PointView({
       point,
       destinations,
       offers,
@@ -31,7 +32,7 @@ export default class PointPresenter {
       },
     });
 
-    // Создаем экземпляр Формы, передавая данные точку и хэндлер при отправке и сбросе)
+    // Создаем экземпляр ФОРМЫ, передавая данные точку и хэндлер при отправке и сбросе)
     this.#pointEditFormComponent = new PointEditFormView({
       point,
       destinations,
@@ -44,7 +45,8 @@ export default class PointPresenter {
       },//  что делаем при СБРОСЕ формы
     })
 
-    render(this.#pointComponent,this.#pointListContainer);
+    render(this.#pointComponent,this.#pointListContainer)
+    console.log(this.#pointListContainer);
   }
 
   // МЕТОД для замены _точки_ на ФОРМУ
@@ -52,28 +54,23 @@ export default class PointPresenter {
     replace(this.#pointEditFormComponent, this.#pointComponent);
     document.addEventListener('keydown', this.#escKeyDownHandler);
   }
-
   // МЕТОД для замены _формы_ на ТОЧКУ
   #replaceFormToPoint() {
     replace(this.#pointComponent, this.#pointEditFormComponent);
     document.removeEventListener('keydown', this.#escKeyDownHandler);
   }
-
   // МЕТОД, что делаем при КЛИКЕ/РАСКРЫТИИ (заменяем точку на форму)
   #handlePointEditClick = () => {
     this.#replacePointToForm();
   }
-
   // МЕТОД, что делаем при ОТПРАВКЕ формы (заменяем форму на точку)
   #handleEditFormSubmit = () => {
     this.#replaceFormToPoint()
   }
-
   // МЕТОД, что делаем при СБРОСЕ формы (заменяем форму на точку)
   #handleEditFormReset = () => {
     this.#replaceFormToPoint();
   }
-
   // МЕТОД, что делаем при нажатии на кнопку Esc
   #escKeyDownHandler = (evt) => {
     if (evt.key === 'Escape') {
@@ -82,8 +79,9 @@ export default class PointPresenter {
     }
   };
 
-  init(item) {
-    this.#item = item;
-    this.#renderPoints(this.#item, this.#destinations, this.#offers);
+  init(point) {
+    //console.log(point) //это объект точки
+    this.#point = point;
+    this.#renderPoint(this.#point, this.#destinations, this.#offers);
   }
 }

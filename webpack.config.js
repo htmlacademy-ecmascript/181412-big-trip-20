@@ -9,13 +9,6 @@ module.exports = {
         path: path.resolve(__dirname, 'build'), /* Имя папки, в которую собираем. URL абсолютный! */
         clean: true, /* Удаление папки build перед новой сборкой*/
     },
-    devServer: {
-        open: {
-            app: {
-                name: 'chrome', /* Для открытия в Google Chrome */
-            },
-        },
-    },
     devtool: 'source-map', /* Карта исходного кода */
     plugins: [
         new CopyPlugin({

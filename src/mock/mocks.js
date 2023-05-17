@@ -205,7 +205,8 @@ const mockPoints = [
     basePrice: 500,
     dateFrom: '2023-01-11T03:30:56.845Z',
     dateTo: '2023-02-12T05:00:13.375Z',
-    isFavorite: true
+    isFavorite: true,
+    destination: 3
   },
   {
     id: 1,
@@ -214,7 +215,8 @@ const mockPoints = [
     basePrice: 40,
     dateFrom: '2023-09-11T03:30:56.845Z',
     dateTo: '2023-09-12T04:00:13.375Z',
-    isFavorite: true
+    isFavorite: true,
+    destination: 2
   },
   {
     id: 2,
@@ -223,7 +225,8 @@ const mockPoints = [
     basePrice: 200,
     dateFrom: '2023-10-11T03:30:56.845Z',
     dateTo: '2023-10-12T06:00:13.375Z',
-    isFavorite: true
+    isFavorite: true,
+    destination: 3
   },
   {
     id: 3,
@@ -232,7 +235,8 @@ const mockPoints = [
     basePrice: 80,
     dateFrom: '2023-05-10T03:30:56.845Z',
     dateTo: '2023-05-17T04:00:13.375Z',
-    isFavorite: true
+    isFavorite: true,
+    destination: 2
   },
   {
     id: 4,
@@ -241,7 +245,8 @@ const mockPoints = [
     basePrice: 90,
     dateFrom: '2023-07-11T03:30:56.845Z',
     dateTo: '2023-07-12T07:00:13.375Z',
-    isFavorite: true
+    isFavorite: true,
+    destination: 1
   },
   {
     id: 5,
@@ -250,7 +255,8 @@ const mockPoints = [
     basePrice: 150,
     dateFrom: '2023-03-11T03:30:56.845Z',
     dateTo: '2023-03-12T03:45:13.375Z',
-    isFavorite: true
+    isFavorite: true,
+    destination: 2
   },
   {
     id: 6,
@@ -259,7 +265,8 @@ const mockPoints = [
     basePrice: 150,
     dateFrom: '2023-02-11T03:30:56.845Z',
     dateTo: '2023-02-12T05:30:13.375Z',
-    isFavorite: false
+    isFavorite: false,
+    destination: 1
   },
   {
     id: 7,
@@ -268,7 +275,8 @@ const mockPoints = [
     basePrice: 100,
     dateFrom: '2023-05-11T03:30:56.845Z',
     dateTo: '2023-05-21T07:00:13.375Z',
-    isFavorite: false
+    isFavorite: false,
+    destination: 2
   },
   {
     id: 8,
@@ -277,7 +285,8 @@ const mockPoints = [
     basePrice: 100,
     dateFrom: '2023-05-10T03:30:56.845Z',
     dateTo: '2023-05-20T04:15:13.375Z',
-    isFavorite: false
+    isFavorite: false,
+    destination: 1
   }
 ];
 

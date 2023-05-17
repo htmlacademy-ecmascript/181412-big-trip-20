@@ -31,12 +31,11 @@ const createOfferSelectors = (arr, base, type, pointID) => arr.map((item) => {
 }).join('');
 
 
-/* Форма редактирования точки */
+/* Функция для ШАБЛОНА создания Формы редактирования */
 function createPointEditFormTemplate(point, destinations, offers) {
-  const {id: pointID, offers: evenOffers, dateFrom, dateTo, basePrice, type} = point;
+  const {id: pointID, offers: eventOffers, dateFrom, dateTo, basePrice, type} = point;
 
   const pointDestination = destinations.find((item) => point.destination === item.id);
-  console.log(pointDestination)
   const description = pointDestination.description;
   const pictures = pointDestination.pictures;
   //const { description, pictures } = pointDestination;
@@ -78,7 +77,7 @@ function createPointEditFormTemplate(point, destinations, offers) {
                     <label class="event__label  event__type-output" for="event-destination-1">
                       ${type}
                     </label>
-                    <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="${destination}" list="destination-list-1">
+                    <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="${pointDestination.name}" list="destination-list-1">
                     <datalist id="destination-list-1">
                       ${createCityNameList}
                     </datalist>
