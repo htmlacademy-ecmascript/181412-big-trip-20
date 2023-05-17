@@ -2,9 +2,9 @@ import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration.js';
 import {FILTER_DAY_FORMAT} from '../const.js';
 
-import isBetween from 'dayjs/plugin/isBetween';
+//import isBetween from 'dayjs/plugin/isBetween';
 dayjs.extend(duration);
-dayjs.extend(isBetween);
+//dayjs.extend(isBetween);
 
 /* Функция для форматирования даты */
 function humanizeDate(date,dateFormat) {

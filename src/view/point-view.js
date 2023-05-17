@@ -1,16 +1,20 @@
 import {humanizeDate, calculateDiffTime} from '../utils/point.js';
-import { DATE_FORMAT, DATE_TIME_FORMAT } from '../const.js';
+import { DATE_FORMAT, DATE_TIME_FORMAT, TIME_FORMAT } from '../const.js';
 import {offersByTypes} from '../mock/mocks.js';
 import AbstractView from '../framework/view/abstract-view.js';
 
 /* Точка */
 function createTripEventsItemTemplate(point) {
-  const {basePrice, dateFrom, timeFrom, timeTo, dateTo, isFavorite, destination, type, offers} = point;
+  const {basePrice, dateFrom, dateTo, isFavorite, destination, type, offers} = point;
 
   const favoriteClassName = isFavorite ? 'event__favorite-btn event__favorite-btn--active' : 'event__favorite-btn';
+
   const humanizeDateFrom = humanizeDate(dateFrom, DATE_FORMAT);
-  const dateFromEvent = humanizeDate(dateFrom, DATE_TIME_FORMAT);
-  const dateToEvent = humanizeDate(dateTo, DATE_TIME_FORMAT);
+  const dateFromEvent = humanizeDate(dateFrom, DATE_TIME_FORMAT); // дата начала
+  const dateToEvent = humanizeDate(dateTo, DATE_TIME_FORMAT); // дата окончания
+  const timeFromEvent = humanizeDate(dateFrom, TIME_FORMAT); //время начала
+  const timeToEvent = humanizeDate(dateTo, TIME_FORMAT); // время окончания
+
   const pointTypeOffer = offersByTypes.find((offer) => offer.type === type);
   const checkedOffers = pointTypeOffer.offers.filter((offer) => offers.includes(offer.id));
   const pointDuration = calculateDiffTime(dateFrom, dateTo);
@@ -41,9 +45,9 @@ function createTripEventsItemTemplate(point) {
                 <h3 class="event__title">${type} ${destination}</h3>
                 <div class="event__schedule">
                   <p class="event__time">
-                    <time class="event__start-time" datetime="${dateFromEvent}T${timeFrom}">${timeFrom}</time>
+                    <time class="event__start-time" datetime="${dateFromEvent}T${timeFromEvent}">${timeFromEvent}</time>
                     —
-                    <time class="event__end-time" datetime="${dateToEvent}T${timeTo}">${timeTo}</time>
+                    <time class="event__end-time" datetime="${dateToEvent}T${timeToEvent}">${timeToEvent}</time>
                   </p>
                   <p class="event__duration">${pointDuration}</p>
                 </div>
