@@ -1,6 +1,6 @@
 import {getRandomArrayElement, getRandomNumber} from '../utils/common.js';
 
-const offersByTypes = [
+const mockOffers = [
   {
     'type': 'taxi',
     'offers': [
@@ -161,7 +161,7 @@ const offersByTypes = [
   },
 ];
 
-const tripDestinations = [
+const mockDestinations = [
   {
     id: 1,
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet varius magna, non porta ligula feugiat eget.',
@@ -169,6 +169,7 @@ const tripDestinations = [
     pictures: [
       {
         src: `https://loremflickr.com/248/152?random=${getRandomNumber(1,10)}`,
+        description: 'Sed blandit, eros vel aliquam faucibus'
       }
     ]
   },
@@ -179,6 +180,7 @@ const tripDestinations = [
     pictures: [
       {
         src: `https://loremflickr.com/248/152?random=${getRandomNumber(1,10)}`,
+        description: 'Sed blandit, eros vel aliquam faucibus'
       }
     ]
   },
@@ -189,19 +191,17 @@ const tripDestinations = [
     pictures: [
       {
         src: `https://loremflickr.com/248/152?random=${getRandomNumber(1,10)}`,
+        description: 'Sed blandit, eros vel aliquam faucibus'
       }
     ]
   }
 ];
 
-const MOCK_POINTS = [
+const mockPoints = [
   {
     id: 0,
     type: 'taxi',
     offers: [1, 2],
-    destination: tripDestinations[0].name,
-    description: tripDestinations[0].description,
-    pictures: tripDestinations[0].pictures.src,
     basePrice: 500,
     dateFrom: '2023-01-11T03:30:56.845Z',
     dateTo: '2023-02-12T05:00:13.375Z',
@@ -211,8 +211,6 @@ const MOCK_POINTS = [
     id: 1,
     type: 'bus',
     offers: [1, 3],
-    destination: tripDestinations[1].name,
-    description: tripDestinations[1].description,
     basePrice: 40,
     dateFrom: '2023-09-11T03:30:56.845Z',
     dateTo: '2023-09-12T04:00:13.375Z',
@@ -222,8 +220,6 @@ const MOCK_POINTS = [
     id: 2,
     type: 'train',
     offers: [1, 2],
-    destination: tripDestinations[2].name,
-    description: tripDestinations[2].description,
     basePrice: 200,
     dateFrom: '2023-10-11T03:30:56.845Z',
     dateTo: '2023-10-12T06:00:13.375Z',
@@ -233,8 +229,6 @@ const MOCK_POINTS = [
     id: 3,
     type: 'ship',
     offers: [1, 2],
-    destination: tripDestinations[0].name,
-    description: tripDestinations[0].description,
     basePrice: 80,
     dateFrom: '2023-05-10T03:30:56.845Z',
     dateTo: '2023-05-17T04:00:13.375Z',
@@ -244,8 +238,6 @@ const MOCK_POINTS = [
     id: 4,
     type: 'drive',
     offers: [1, 2],
-    destination: tripDestinations[1].name,
-    description: tripDestinations[1].description,
     basePrice: 90,
     dateFrom: '2023-07-11T03:30:56.845Z',
     dateTo: '2023-07-12T07:00:13.375Z',
@@ -255,8 +247,6 @@ const MOCK_POINTS = [
     id: 5,
     type: 'flight',
     offers: [1, 2, 3],
-    destination: tripDestinations[2].name,
-    description: tripDestinations[2].description,
     basePrice: 150,
     dateFrom: '2023-03-11T03:30:56.845Z',
     dateTo: '2023-03-12T03:45:13.375Z',
@@ -266,8 +256,6 @@ const MOCK_POINTS = [
     id: 6,
     type: 'check-in',
     offers: [1, 2],
-    destination: tripDestinations[0].name,
-    description: tripDestinations[0].description,
     basePrice: 150,
     dateFrom: '2023-02-11T03:30:56.845Z',
     dateTo: '2023-02-12T05:30:13.375Z',
@@ -277,8 +265,6 @@ const MOCK_POINTS = [
     id: 7,
     type: 'sightseeing',
     offers: [1, 2],
-    destination: tripDestinations[1].name,
-    description: tripDestinations[1].description,
     basePrice: 100,
     dateFrom: '2023-05-11T03:30:56.845Z',
     dateTo: '2023-05-21T07:00:13.375Z',
@@ -288,8 +274,6 @@ const MOCK_POINTS = [
     id: 8,
     type: 'restaurant',
     offers: [1, 2],
-    destination: tripDestinations[2].name,
-    description: tripDestinations[2].description,
     basePrice: 100,
     dateFrom: '2023-05-10T03:30:56.845Z',
     dateTo: '2023-05-20T04:15:13.375Z',
@@ -297,7 +281,7 @@ const MOCK_POINTS = [
   }
 ];
 
-const getRandomPoint = () => (getRandomArrayElement(MOCK_POINTS));
+const getRandomPoint = () => (getRandomArrayElement(mockPoints));
 
-export { tripDestinations, offersByTypes, getRandomPoint};
+export { mockPoints, mockDestinations, mockOffers, getRandomPoint};
 

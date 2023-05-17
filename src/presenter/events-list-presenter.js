@@ -1,9 +1,11 @@
-import {RenderPosition, render, remove} from '../framework/render.js';
-import PointsListView from '../view/point-list-view.js';
+import {RenderPosition, render, remove, replace} from '../framework/render.js';
+import PointsListView from '../view/point-list-view.js'; //ul
 import TripInfoView from '../view/trip-info-view.js';
 import SortView from '../view/sort-view.js';
 import EmptyListView from '../view/empty-list-view.js';
 import PointPresenter from './point-presenter';
+import PointView from "../view/point-view";
+import PointEditFormView from "../view/point-edit-form-view";
 
 export default class EventsListPresenter {
   #pointsModel = null;
@@ -13,20 +15,37 @@ export default class EventsListPresenter {
   #sortComponent = new SortView(); // Создаем экземпляр сортировки
   #emptyListComponent = new EmptyListView(); // Создаем экземпляер пустого листа
 
-  #points = [];
 
   constructor({eventsListContainer, pointsModel}) {
     this.#eventsListContainer = eventsListContainer;
     this.#pointsModel = pointsModel;
   }
-  // Метод для отрисовки ТОЧКИ
-  #renderPoint(point) {
+
+  init() {
+    /* Передаем массив точек */
+    const points = [...this.#pointsModel.getPoints()];
+    const destinations = this.#pointsModel.getDestinations();
+    const offers = this.#pointsModel.getOffers();
+
+    if (points.length === 0) {
+      this.#renderEmptyList();
+    }
+
     const pointPresenter = new PointPresenter({
+      points,
+      destinations,
+      offers,
       pointListContainer: this.#pointsListComponent.element
     });
 
-    pointPresenter.init(point);
+    // pointPresenter.init(point);
+    //Отрисовывает, но нормально работает ТОЛЬКО последний
+    for (let i = 0; i < points.length; i++) {
+      pointPresenter.init(points[i]);
+      // this.#renderPoints(points[i], destinations, offers);
+    }
   }
+
 
   //Метод для отрисовки ЗАГОЛОВКА
   #renderTitle() {
@@ -45,29 +64,38 @@ export default class EventsListPresenter {
   }
 
   // Метод для отрисовки ТОЧЕК
-  #renderPoints() {
-    // Вставляем сортировку
-    this.#renderSort()
+  #renderPoints(point, destinations, offers) {
+    const escKeyHandler = (evt) => {
+    };
+    const itemComponent = new PointView({
+      point,
+      destinations,
+      offers,
+      onEditFormShow: () => {
+        replacePointToForm();
+      },
+    });
 
-    // вставляем сам ul лист в контейнер
-    render(this.#pointsListComponent, this.#eventsListContainer, RenderPosition.BEFOREEND);
+    const pointEditForm = new PointEditFormView({
+      point,
+      destinations,
+      offers,
+      onFormSubmit: () => {
+        replaseFormToPoint();
+      },
+    });
 
-    // теперь добавляем li точки
-    for(let i = 0; i < this.#points.length ; i++) {
-      this.#renderPoint(this.#points[i]);
+    function replacePointToForm() {
+      replace(pointEditForm, itemComponent);
+      document.addEventListener('keydown', escKeyHandler);
     }
-  }
 
-  init() {
-    /* Передаем массив точек */
-    this.#points = [...this.#pointsModel.points];
-
-    if (this.#points.length === 0) {
-      this.#renderEmptyList();
-    } else {
-      this.#renderTitle(); // Рисуем верхний заголовок
-      this.#renderPoints(); // Отрисовываем точки
+    function replaseFormToPoint() {
+      replace(itemComponent, pointEditForm);
+      document.removeEventListener('keydown', escKeyHandler);
     }
+
+    render(itemComponent, this.#pointsListComponent .element);
   }
 }
 

@@ -3,35 +3,50 @@ import PointView from '../view/point-view.js';
 import PointEditFormView from "../view/point-edit-form-view.js";
 
 export default class PointPresenter {
+  #points = null;
+  #destinations = null;
+  #offers = null;
   #pointListContainer= null; // будущий список (ul)
-
   #pointComponent = null; // будущая точка (li)
   #pointEditFormComponent = null;// будущая форма редактирования
 
-  #point = null;
+  #item = null;
+  #escKeyHandler = null;
 
-  constructor({pointListContainer}) { /*При создании нужно будет указывать, куда вставляем*/
+  constructor({points, destinations, offers, pointListContainer}) {
+    this.#points = points;
+    this.#destinations = destinations;
+    this.#offers = offers;
     this.#pointListContainer = pointListContainer;
   }
 
-  init(point) { /*При вызове метода нужно будет передать точку*/
-    this.#point = point;
-
+  #renderPoints(point, destinations, offers) { /*При вызове метода нужно будет передать точку*/
     // Создаем экземпляр ТОЧКИ, передавая данные точки и хэндлер при клике (открытии)
     this.#pointComponent = new PointView({ /* Создаем экзепляр Точки*/
-      point: this.#point,
-      onPointEditClick: this.#handlePointEditClick, // ЧТО делаем при раскрытии формы
+      point,
+      destinations,
+      offers,
+      onPointEditClick: () => { // ЧТО делаем при раскрытии формы
+        this.#replacePointToForm();
+      },
     });
 
     // Создаем экземпляр Формы, передавая данные точку и хэндлер при отправке и сбросе)
     this.#pointEditFormComponent = new PointEditFormView({
-      point: this.#point,
-      onEditFormSubmit: this.#handleEditFormSubmit, // что делаем при ОТПРАВКЕ формы
-      onEditFormReset: this.#handleEditFormReset, //  что делаем при СБРОСЕ формы
-    });
+      point,
+      destinations,
+      offers,
+      onEditFormSubmit: () => {
+        this.#replaceFormToPoint();
+      }, // что делаем при ОТПРАВКЕ формы
+      onEditFormReset: () => {
+        this.#replaceFormToPoint();
+      },//  что делаем при СБРОСЕ формы
+    })
 
     render(this.#pointComponent,this.#pointListContainer);
   }
+
   // МЕТОД для замены _точки_ на ФОРМУ
   #replacePointToForm() {
     replace(this.#pointEditFormComponent, this.#pointComponent);
@@ -66,4 +81,9 @@ export default class PointPresenter {
       this.#replaceFormToPoint();
     }
   };
+
+  init(item) {
+    this.#item = item;
+    this.#renderPoints(this.#item, this.#destinations, this.#offers);
+  }
 }
