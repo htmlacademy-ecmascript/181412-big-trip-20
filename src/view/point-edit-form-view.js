@@ -1,15 +1,18 @@
 import {humanizeDate} from '../utils/point.js';
 import {getRandomNumber} from '../utils/common.js';
 import {offersByTypes} from '../mock/mocks.js';
-import {DATE_TIME_FORMAT} from '../const.js';
+import {DATE_TIME_EDIT_FORMAT, TIME_FORMAT} from '../const.js';
 import AbstractView from '../framework/view/abstract-view.js';
 
 /* Форма редактирования точки */
 function createPointEditFormTemplate(point) {
-  const {dateFrom, dateTo, destination, timeTo, timeFrom, basePrice, description, offers, type} = point;
-  const dateFromEvent = humanizeDate(dateFrom, DATE_TIME_FORMAT); /*Начальная дата, отформатированная*/
-  const dateToEvent = humanizeDate(dateTo, DATE_TIME_FORMAT); /*Конечная дата, отформатированная*/
+  const {dateFrom, dateTo, destination, basePrice, description, offers, type} = point;
+  const dateFromEvent = humanizeDate(dateFrom, DATE_TIME_EDIT_FORMAT); /*Начальная дата, отформатированная*/
+  const dateToEvent = humanizeDate(dateTo, DATE_TIME_EDIT_FORMAT); /*Конечная дата, отформатированная*/
+  const timeFromEvent = humanizeDate(dateFrom, TIME_FORMAT); //время начала
+  const timeToEvent = humanizeDate(dateTo, TIME_FORMAT); // время окончания
   const pointTypeOffer = offersByTypes.find((item) => item.type === type); /*Нашли список офферов для нашего ТИПА*/
+
 
   /*Функция для отрисовки _чекнутых_ Офферов */
   const createCheckedTripOffersTemplate = pointTypeOffer.offers.map((offer) => {
@@ -65,10 +68,10 @@ function createPointEditFormTemplate(point) {
 
                   <div class="event__field-group  event__field-group--time">
                     <label class="visually-hidden" for="event-start-time-1">From</label>
-                    <input class="event__input  event__input--time" id="event-start-time-1" type="text" name="event-start-time" value="${dateFromEvent} ${timeTo}">
+                    <input class="event__input  event__input--time" id="event-start-time-1" type="text" name="event-start-time" value="${dateFromEvent} ${timeFromEvent}">
                     —
                     <label class="visually-hidden" for="event-end-time-1">To</label>
-                    <input class="event__input  event__input--time" id="event-end-time-1" type="text" name="event-end-time" value="${dateToEvent} ${timeFrom}">
+                    <input class="event__input  event__input--time" id="event-end-time-1" type="text" name="event-end-time" value="${dateToEvent} ${timeToEvent}">
                   </div>
 
                   <div class="event__field-group  event__field-group--price">
